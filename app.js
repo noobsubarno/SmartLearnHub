@@ -3,7 +3,8 @@ const sections = {
   home: document.getElementById('home'),
   lectures: document.getElementById('lectures'),
   quiz: document.getElementById('quiz'),
-  progress: document.getElementById('progress')
+  progress: document.getElementById('progress'),
+  result: document.getElementById('result')
 };
 
 // Function to show a section
@@ -23,6 +24,7 @@ document.getElementById('goto-progress').onclick = () => show('progress');
 document.getElementById('back-from-lectures').onclick = () => show('home');
 document.getElementById('back-from-quiz').onclick = () => show('home');
 document.getElementById('back-from-progress').onclick = () => show('home');
+document.getElementById('back-from-result').onclick = () => show('home');
 
 // Lectures
 const lectures = [
@@ -58,13 +60,45 @@ quizQuestions.forEach((qq, idx) => {
   quizContainer.appendChild(div);
 });
 
+// Submit quiz and show result section
 document.getElementById('submit-quiz').onclick = () => {
   let score = 0; 
+  const details = [];
+  
   quizQuestions.forEach((qq, idx) => {
     const sel = document.querySelector(`input[name="q${idx}"]:checked`);
-    if(sel && parseInt(sel.value) === qq.a) score++;
+    const userAns = sel ? parseInt(sel.value) : -1;
+    if(userAns === qq.a) {
+      score++;
+      details.push(`Q${idx+1}: Correct ✅`);
+    } else {
+      const correctText = qq.options[qq.a];
+      const userText = userAns >= 0 ? qq.options[userAns] : "No answer";
+      details.push(`Q${idx+1}: Wrong ❌ (Your answer: ${userText}, Correct: ${correctText})`);
+    }
   });
-  alert(`Score: ${score}/${quizQuestions.length}`);
+
+  show('result');
+
+  document.getElementById('result-score').textContent = `Your Score: ${score}/${quizQuestions.length}`;
+
+  const resultList = document.getElementById('result-details');
+  resultList.innerHTML = '';
+  details.forEach(d => {
+    const li = document.createElement('li');
+    li.textContent = d;
+    if(d.includes('Correct')) li.style.color = 'green';
+    else li.style.color = 'red';
+    resultList.appendChild(li);
+  });
+};
+
+// Reset quiz
+document.getElementById('reset-quiz').onclick = () => {
+  quizQuestions.forEach((qq, idx) => {
+    const sel = document.querySelectorAll(`input[name="q${idx}"]`);
+    sel.forEach(s => s.checked = false);
+  });
 };
 
 // Progress

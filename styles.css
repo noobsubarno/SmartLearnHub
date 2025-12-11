@@ -26,6 +26,14 @@ body {
   font-weight: 600;
 }
 
+/* Logo */
+.logo {
+  height: 40px;
+  width: auto;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
 /* Cards on dashboard */
 .cards {
   display: grid;

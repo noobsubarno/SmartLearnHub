@@ -4,6 +4,8 @@ body {
   font-family: Arial, sans-serif;
   background: #f7fbff;
   color: #062635;
+  position: relative;
+  min-height: 100vh;
 }
 
 /* Top bar */
@@ -14,6 +16,8 @@ body {
   padding: 12px 20px;
   background: #0b63d1;
   color: white;
+  position: relative;
+  z-index: 1;
 }
 
 .nav-btn {
@@ -26,12 +30,17 @@ body {
   font-weight: 600;
 }
 
-/* Logo */
-.logo {
-  height: 40px;
-  width: auto;
-  margin-right: 10px;
-  vertical-align: middle;
+/* Watermark logo */
+.watermark-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4in;       /* 4 inches wide */
+  height: auto;
+  opacity: 0.1;     /* faint watermark */
+  z-index: 0;       /* behind content */
+  pointer-events: none;
 }
 
 /* Cards on dashboard */
@@ -40,6 +49,8 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
   margin-top: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .card {
@@ -52,6 +63,7 @@ body {
   justify-content: space-between;
 }
 
+/* Buttons */
 .primary {
   background: #0b63d1;
   color: white;
@@ -112,4 +124,6 @@ body {
   color: #546678;
   font-size: 13px;
   margin-top: 30px;
+  position: relative;
+  z-index: 1;
 }

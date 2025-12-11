@@ -60,37 +60,39 @@ quizQuestions.forEach((qq, idx) => {
   quizContainer.appendChild(div);
 });
 
-// Submit quiz and show result section
+// Submit quiz and show results
 document.getElementById('submit-quiz').onclick = () => {
   let score = 0; 
-  const details = [];
-  
+  const resultContainer = document.getElementById('result-container');
+  resultContainer.innerHTML = '';
+
   quizQuestions.forEach((qq, idx) => {
     const sel = document.querySelector(`input[name="q${idx}"]:checked`);
     const userAns = sel ? parseInt(sel.value) : -1;
-    if(userAns === qq.a) {
-      score++;
-      details.push(`Q${idx+1}: Correct ✅`);
-    } else {
-      const correctText = qq.options[qq.a];
-      const userText = userAns >= 0 ? qq.options[userAns] : "No answer";
-      details.push(`Q${idx+1}: Wrong ❌ (Your answer: ${userText}, Correct: ${correctText})`);
-    }
-  });
+    const isCorrect = userAns === qq.a;
+    if(isCorrect) score++;
 
-  show('result');
+    const card = document.createElement('div');
+    card.className = 'quiz-question';
+    card.style.border = isCorrect ? '2px solid green' : '2px solid red';
+    
+    const questionHTML = `<strong>Q${idx+1}.</strong> ${qq.q}`;
+    const userAnswerText = userAns >= 0 ? qq.options[userAns] : 'No answer';
+    const correctAnswerText = qq.options[qq.a];
+    const feedback = isCorrect ? 'Correct ✅' : 'Wrong ❌';
+
+    card.innerHTML = `
+      ${questionHTML}<br>
+      <strong>Your Answer:</strong> ${userAnswerText}<br>
+      <strong>Correct Answer:</strong> ${correctAnswerText}<br>
+      <strong>Feedback:</strong> ${feedback}
+    `;
+
+    resultContainer.appendChild(card);
+  });
 
   document.getElementById('result-score').textContent = `Your Score: ${score}/${quizQuestions.length}`;
-
-  const resultList = document.getElementById('result-details');
-  resultList.innerHTML = '';
-  details.forEach(d => {
-    const li = document.createElement('li');
-    li.textContent = d;
-    if(d.includes('Correct')) li.style.color = 'green';
-    else li.style.color = 'red';
-    resultList.appendChild(li);
-  });
+  show('result');
 };
 
 // Reset quiz

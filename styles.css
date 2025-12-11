@@ -80,7 +80,7 @@ body {
 }
 
 /* Quiz question styling */
-.quiz-question {
+.quiz-question, #result-details li {
   background: #fff;
   padding: 14px;
   border-radius: 10px;

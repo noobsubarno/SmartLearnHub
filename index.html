@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SmartLearn Hub</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">SmartLearn Hub</div>
+    <nav class="nav">
+      <button id="nav-home" class="nav-btn">Home</button>
+      <button id="nav-lectures" class="nav-btn">Lectures</button>
+      <button id="nav-quiz" class="nav-btn">Quiz</button>
+      <button id="nav-progress" class="nav-btn">Progress</button>
+    </nav>
+  </header>
+
+  <main id="app">
+    <!-- HOME / DASHBOARD -->
+    <section id="home" class="screen">
+      <h1>Welcome to SmartLearn Hub</h1>
+      <p>Easy access to lectures, quizzes, and progress tracking — designed with HCI principles.</p>
+      <div class="cards">
+        <div class="card">
+          <h3>Lecture Materials</h3>
+          <button class="primary" id="goto-lectures">Open Lectures</button>
+        </div>
+        <div class="card">
+          <h3>Quick Quiz</h3>
+          <button class="primary" id="goto-quiz">Start Quiz</button>
+        </div>
+        <div class="card">
+          <h3>Progress</h3>
+          <button class="primary" id="goto-progress">View Progress</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LECTURES -->
+    <section id="lectures" class="screen" hidden>
+      <h1>Lecture Materials</h1>
+      <ul id="lecture-list"></ul>
+      <button class="secondary" id="back-from-lectures">Back</button>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="screen" hidden>
+      <h1>Quick Quiz</h1>
+      <div id="quiz-container"></div>
+      <button id="submit-quiz" class="primary">Submit</button>
+      <button id="reset-quiz" class="secondary">Reset</button>
+      <button class="secondary" id="back-from-quiz">Back</button>
+    </section>
+
+    <!-- PROGRESS -->
+    <section id="progress" class="screen" hidden>
+      <h1>Your Progress</h1>
+      <p>You have completed <strong id="progress-percent">0%</strong> of the activities.</p>
+      <div class="progress-bar">
+        <div id="progress-fill" class="progress-fill" style="width:0%"></div>
+      </div>
+      <button class="primary" id="increase-progress">Mark activity complete (+20%)</button>
+      <button class="secondary" id="reset-progress">Reset Progress</button>
+      <button class="secondary" id="back-from-progress">Back</button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>SmartLearn Hub — CHC401 HCI Assessment Prototype</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
